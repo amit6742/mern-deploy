@@ -13,7 +13,7 @@ mongoose.set("strictQuery", false);
 // database
 const connectDatabase = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URL);
+    await mongoose.connect(process.env.mongo);
     console.log("database connect is successfully!");
   } catch (error) {
     console.log(error);
@@ -24,7 +24,7 @@ const connectDatabase = async () => {
 server.use(cors());
 server.use(morgan());
 server.use(express.json());
-server.use(express.static(path.resolve(__dirname, process.env.PUBLIC_DIR)));
+server.use(express.static(path.resolve(__dirname, process.env.public)));
 server.use("/products", productRouter.router);
 server.use("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "build", "index.html"));
